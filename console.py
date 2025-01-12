@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 """Defines AirBnB console."""
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 import cmd
 from models import storage
 from models.base_model import BaseModel
