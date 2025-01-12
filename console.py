@@ -26,8 +26,10 @@ class HBNBCommand(cmd.Cmd):
     }
 
     def emptyline(self):
-        """Do nothing upon receiving an empty line."""
-        pass
+        """Do nothing upon receiving an empty line or a line with only spaces."""
+        if not self.lastcmd.strip():  # If the last command is just spaces or empty
+            return False  # Don't execute anything
+        super().emptyline()  # Otherwise, proceed with the default behavior (do nothing)
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -51,25 +53,15 @@ class HBNBCommand(cmd.Cmd):
             Creates a new instance of a class,
             saves it (to the JSON file) and prints the id.
             Usage: create <class_name>
-       """
-        # If the class name is missing,
-        # print ** class name missing ** (ex: $ create)
+        """
         if len(args) < 1:
             print("** class name missing **")
             return
-        # If the class name doesn’t exist,
-        # print ** class doesn't exist ** (ex: $ create MyModel)
-
-        # convert the args to a list
         args = args.split()
-
-        # the 1st element of the list is the class name
         class_name = args[0]
         if class_name not in self.__all_classes:
             print("** class doesn't exist **")
             return
-        # print(self.__all_classes)
-        # eval() interprets a string as a piece of python code
         new_object = eval(class_name + "()")
         new_object.save()
         print(new_object.id)
@@ -102,7 +94,6 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, args):
         """Usage: to destroy <class> <id> or <class>.destroy(<id>)
         Delete class instance of given id."""
-
         arg_list = args.split()
         all_objects = storage.all()
         if len(arg_list) == 0:
@@ -129,7 +120,6 @@ class HBNBCommand(cmd.Cmd):
         """Usage: all or all <class> or <class>.all()
         Display string representations of all instances of given class
         If no class is specified, display all instantiated objects."""
-
         arg_list = args.split()
         all_objects = storage.all()
         object_list = []
@@ -156,7 +146,6 @@ class HBNBCommand(cmd.Cmd):
        <class>.update(<id>, <dictionary>)
         Update class instance of given id by adding or updating
        given attribute key/value pair or dictionary."""
-
         arg_list = args.split()
         all_objects = storage.all()
 
@@ -196,11 +185,7 @@ class HBNBCommand(cmd.Cmd):
             elif isinstance(attribute_value, int):
                 attribute_value = int(attribute_value)
 
-        # update BaseModel 00c0c670-e5f3-4603-9aa1-3caca5ee0e75
-        # email "aibnb@mail.com"
-
         obj = all_objects[object_key]
-        # check if the attribute exist already
         if attribute_name in obj.to_dict():
             attribute_original_type = type(obj[attribute_name])
             attribute_value = attribute_original_type(attribute_value)
@@ -208,7 +193,6 @@ class HBNBCommand(cmd.Cmd):
             if attribute_original_type in {str, int, float}:
                 attribute_value = attribute_original_type(attribute_value)
                 obj[attribute_name] = attribute_value
-        # if it doesn’t exist we add it
         else:
             obj.__dict__.update({attribute_name: attribute_value})
 
