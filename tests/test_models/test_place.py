@@ -1,83 +1,84 @@
 #!/usr/bin/python3
-""" Place module """
-from tests.test_models.test_base_model import test_basemodel
+import unittest
 from models.place import Place
 
 
-class test_Place(test_basemodel):
-    """ test the Place class """ 
-
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Place"
-        self.value = Place
+class TestPlaceAttributes(unittest.TestCase):
+    """
+    Test case class for the Place attributes in the models.Place module.
+    """
 
     def test_city_id(self):
-        """ the city id should be a string """
-        new = self.value()
-        self.assertEqual(type(new.city_id), str)
+        """
+        Test if the city_id attribute of Place is a string and has the default
+        value of an empty string.
+        """
+        self.assertIsInstance(Place.city_id, str)
+        self.assertEqual(Place.city_id, "")
 
     def test_user_id(self):
-        """ the user id should be a string """
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
+        """ Test if the user_id attribute of Place is a string and has
+        the default value of an empty string.
+        """
+        self.assertIsInstance(Place.user_id, str)
+        self.assertEqual(Place.user_id, "")
 
     def test_name(self):
-        """ The name should be a string """
-        new = self.value()
-        self.assertEqual(type(new.name), str)
+        """ Test if the "ame attribute of Place is a string and has the default
+        value of an empty string.
+        """
+        self.assertIsInstance(Place.name, str)
+        self.assertEqual(Place.name, "")
 
     def test_description(self):
-        """  The description should be a string """
-        new = self.value()
-        self.assertEqual(type(new.description), str)
+        """ Test if the description attribute of Place is a string and
+        has the default value of an empty string.
+        """
+        self.assertIsInstance(Place.description, str)
+        self.assertEqual(Place.description, "")
 
     def test_number_rooms(self):
-        """ 
-        Tests that the number of rooms in a Place is an integer.
+        """ Test if the number_rooms attribute of Place is an integer and
+        has the default value of 0.
         """
-        new = self.value()
-        self.assertEqual(type(new.number_rooms), int)
+        self.assertIsInstance(Place.number_rooms, int)
+        self.assertEqual(Place.number_rooms, 0)
 
     def test_number_bathrooms(self):
+        """ Test if the number_bathrooms attribute of Place is an integer
+        and has the default value of 0.
         """
-        Tests that the number of bathrooms in a Place is an integer.
-        """
-        new = self.value()
-        self.assertEqual(type(new.number_bathrooms), int)
+        self.assertIsInstance(Place.number_bathrooms, int)
+        self.assertEqual(Place.number_bathrooms, 0)
 
     def test_max_guest(self):
+        """ Test if the max_guest attribute of Place is an integer and has the
+        default value of 0.
         """
-        Tests that the maximum number of guests in a Place is an integer.
-        """
-        new = self.value()
-        self.assertEqual(type(new.max_guest), int)
+        self.assertIsInstance(Place.max_guest, int)
+        self.assertEqual(Place.max_guest, 0)
 
     def test_price_by_night(self):
+        """ Test if the 'price_by_night' attribute of Place is an integer and
+        has the default value of 0.
         """
-        Tests that the price by night in a Place is an integer.
-        """
-        new = self.value()
-        self.assertEqual(type(new.price_by_night), int)
+        self.assertIsInstance(Place.price_by_night, int)
+        self.assertEqual(Place.price_by_night, 0)
 
     def test_latitude(self):
+        """ Test if the latitude attribute of Place is a float and has the
+        default value of 0.0.
         """
-        Tests that the latitude of a Place is a float.
-        """
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
+        self.assertIsInstance(Place.latitude, float)
+        self.assertEqual(Place.latitude, 0.0)
 
     def test_longitude(self):
+        """ Test if the 'longitude' attribute of Place is a float and has the
+        default value of 0.0.
         """
-        Tests that the longitude of a Place is a float.
-        """
-        new = self.value()
-        self.assertEqual(type(new.latitude), float)
+        self.assertIsInstance(Place.longitude, float)
+        self.assertEqual(Place.longitude, 0.0)
 
-    def test_amenity_ids(self):
-        """
-        Tests that the amenity_ids of a Place is a list.
-        """
-        new = self.value()
-        self.assertEqual(type(new.amenity_ids), list)
+
+if __name__ == '__main__':
+    unittest.main()
