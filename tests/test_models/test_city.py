@@ -1,37 +1,24 @@
-import unittest
+#!/usr/bin/python3
+""" City module """
+from tests.test_models.test_base_model import test_basemodel
 from models.city import City
-from models.base_model import BaseModel
 
 
-class TestCityClass(unittest.TestCase):
-    """
-    Test case class for the City class in the models.city module.
-    """
-    def test_instance_creation(self):
-        """ Test if City object is successfully created."""
-        city = City()
-        self.assertIsInstance(city, City)
+class test_City(test_basemodel):
+    """test the City class"""
 
-    def test_inheritance(self):
-        """ Test if City class inherits from BaseModel."""
-        self.assertTrue(issubclass(City, BaseModel))
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = "City"
+        self.value = City
 
-    def test_state_id_attribute(self):
-        """ Test if state_id attribute is present in the City class."""
-        self.assertTrue(hasattr(City, 'state_id'))
+    def test_state_id(self):
+        """ the state id should be a string """
+        new = self.value()
+        self.assertEqual(type(new.state_id), str)
 
-    def test_state_id_attribute_type(self):
-        """ Test if 'state_id' attribute in City is a string."""
-        self.assertIsInstance(City.state_id, str)
-
-    def test_name_attribute(self):
-        """ Test if 'name' attribute is present in the City class."""
-        self.assertTrue(hasattr(City, 'name'))
-
-    def test_name_attribute_type(self):
-        """ Test if 'name' attribute in City is a string."""
-        self.assertIsInstance(City.name, str)
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_name(self):
+        """ The name should be a string """
+        new = self.value()
+        self.assertEqual(type(new.name), str)
